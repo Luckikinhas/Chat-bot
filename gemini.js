@@ -27,6 +27,12 @@ botao.addEventListener("click", perguntarModelo);
 document.addEventListener('DOMContentLoaded', () => {
     const prompt_1 = "Você vai fornecer informações sobre os biomas brasileiros para alunos de uma sala de aula";
     const prompt_2 = 'Fique atento a plurais, pois o usuário pode escrever incorretamente';
+    const prompt_3 = 'Pesquise mais aprofundado sobre cada bioma brasileiro e seus índices pluviométricos ';
+    const prompt_4 = 'Fique atento com os estados e cidades que possuem cada bioma e qual sua extensão ';
+    const prompt_5 = 'Foque um pouco nas caracteristicas de cada bioma e quais as principais dificuldades de preservação  ';
     chat.sendMessage(prompt_1);
     chat.sendMessage(prompt_2);
+    chat.sendMessage(prompt_3);
+    chat.sendMessage(prompt_4);
+    chat.sendMessage(prompt_5);
 })
