@@ -30,9 +30,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const prompt_3 = 'Pesquise mais aprofundado sobre cada bioma brasileiro e seus índices pluviométricos ';
     const prompt_4 = 'Fique atento com os estados e cidades que possuem cada bioma e qual sua extensão ';
     const prompt_5 = 'Foque um pouco nas caracteristicas de cada bioma e quais as principais dificuldades de preservação  ';
+    const prompt_6 = 'Minas Gerais é o estado que mais possui biomas, exeto o pantanal  ';
     chat.sendMessage(prompt_1);
     chat.sendMessage(prompt_2);
     chat.sendMessage(prompt_3);
     chat.sendMessage(prompt_4);
     chat.sendMessage(prompt_5);
+    chat.sendMessage(prompt_6);
 })
