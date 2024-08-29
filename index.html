@@ -2,13 +2,30 @@
 <html>
     <head>
         <link rel="stylesheet" href="gemini.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kanit:wght@100;200;300;400;500;600;700;800;900&display=swap">
         <title>Chat bot test</title>
     </head>
+  
 
     <body>
-        <textarea id=''>a</textarea>
-        <input type="text" id="pergunta"></input>
-        <input type="button" id="botao" value="&#10144;">
+      
+        <div  class="backgroundDoChatBot">
+            
+            <header class="cabecalhoChatbot">
+                <h1>Chat Bot</h1>
+            </header>
+
+            <div id="containerPerguntasERespostas"></div>
+
+            <footer class="RodapeChatBot">
+                
+                <input type="text" id="pergunta" style="  font-family: 'Kanit';" placeholder="Pergunte algo..."></input>
+                <button  id="botao"></button>
+             
+            </footer>
+            </div>
+        </div>
+      
 
         <script type='module' src="gemini.js"></script>
     </body>
