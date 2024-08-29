@@ -13,7 +13,6 @@ async function mandar_mensagem(msg) {
     const result = await chat.sendMessage(msg);
     const response = await result.response;//response recebe a resposta do result
     const text = await response.text();//convert text
-    history.push(response);//SO UM TESTE PLM DE DEUS
     console.log(text);
 }
 
@@ -22,28 +21,28 @@ async function perguntarModelo() {
     await mandar_mensagem(text.value)
     text.value = ""
 }
-const botao = document.getElementById("botao")
-botao.addEventListener("click", perguntarModelo);
 
 document.addEventListener('DOMContentLoaded', async function comecar_cod(){
     const allPrompts = [];
-    allPrompts.push('Vou passar algumas dicas e informações necessárias para você responder as perguntas: ')
-    allPrompts.push('você vai fornecer informações sobre os biomas brasileiros para alunos de uma sala de aula, ');
-    allPrompts.push('fique atento a plurais, pois o usuário pode escrever incorretamente, ');
-    allPrompts.push('pesquise mais aprofundado sobre cada bioma brasileiro e seus índices pluviométricos, ');
-    allPrompts.push('fique atento com os estados e cidades que possuem cada bioma e qual sua extensão, ');
-    allPrompts.push('foque um pouco nas caracteristicas de cada bioma e quais as principais dificuldades de preservação, ');
-    allPrompts.push('os estados que possuem mias biomas são Mato Grosso, Mato Grosso do Sul, Bahia e Minas Gerais, cada um com três biomas, ');
-    allPrompts.push('Minas  Gerais possui tres biomas o cerrado, a mata Atlântica, e a Caatinga, não possui pantanal e pampa, ');
-    allPrompts.push('a Bahia possui tres biomas Mata Atlântica, Cerrado e Caatinga, não possui amazonia, ');
-    allPrompts.push('Mato Grosso possui tres biomas Amazônia; Cerrado; Pantanal, ');
-    allPrompts.push('Mato Grosso do Sul possui tres biomas o Cerrado, a Mata Atlântica e o Pantanal, '); 
+    allPrompts.push('Vou passar algumas dicas e informações necessárias para você responder as perguntas:')
+    allPrompts.push('seu nome vai ser Ifinho.')//pode mudar o nome se quiser era só um teste
+    allPrompts.push('sempre que alguem perguntar qual sua missão aqui sua resposta vai ser: é fornecer informações sobre os biomas brasileiros para alunos.');
+    allPrompts.push('fique atento a plurais, pois o usuário pode escrever incorretamente.');
+    allPrompts.push('pesquise mais profundamente sobre cada bioma brasileiro e seus índices pluviométricos.');
+    allPrompts.push('fique atento com os estados e cidades que possuem cada bioma e qual sua extensão.');
+    allPrompts.push('foque um pouco nas caracteristicas de cada bioma e quais as principais dificuldades de preservação.');
+    allPrompts.push('sempre que for perguntado quais estados possuem mais biomas a resposta é: os estados que possuem mais biomas são Mato Grosso, Mato Grosso do Sul, Bahia e Minas Gerais, cada um com três biomas.');
+    allPrompts.push('Minas Gerais possui três biomas o cerrado, a mata Atlântica, e a Caatinga.');
+    allPrompts.push('a Bahia possui três biomas Mata Atlântica, Cerrado e Caatinga.');
+    allPrompts.push('Mato Grosso possui três biomas Amazônia, Cerrado e Pantanal.');
+    allPrompts.push('Mato Grosso do Sul possui três biomas o Cerrado, a Mata Atlântica e o Pantanal.'); 
 
     console.log('Começo')
-    let mandar_prompt = await chat.sendMessage(allPrompts);//TESTE
-    await mandar_prompt.response;//TESTE
+    let mandar_prompt = await chat.sendMessage(allPrompts);
+    await mandar_prompt.response;
+    await mandar_mensagem('Você pode se apresentar pra mim e dizer qual sua missão?')
     console.log('Fim')
 
-    document.createElement('button');
-
+    const botao = document.getElementById("botao")
+    botao.addEventListener("click", perguntarModelo);
 })
