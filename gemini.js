@@ -16,25 +16,27 @@ async function mandar_mensagem(msg) {
     
     mostrarRespostaChatbot(text)
 }
-function mostrarIconeUSuario(){
-    let novoIcone
-}
-function mostrarIconeRoboInterrogação(){
-    let iconesDoRobo = document.getElementsByClassName('iconeRobo');
-    let imgRobo = iconesDoRobo.querySelector('img');
-    imgRobo.settAttribute('src', '')
-}
+
 
 function mostrarRespostaChatbot(resposta){
+    let divp = document.createElement('div');
+    divp.className = 'divPaiRespostaDoChatBot';
+    let icone = document.createElement('img');
+    icone.src = 'default.gif';
+    icone.classList.add('iconeImg');
+    let conteinerIconeChat = document.createElement('div');
     let novoContainerResposta = document.createElement('div');
     let containerPerguntasERespostas = document.getElementById('containerPerguntasERespostas');
 
     let textoNovoContainerResposta = document.createElement('span');
 
-    novoContainerResposta.classList.add('RespostaDoChatBot')
+    novoContainerResposta.classList.add('RespostaDoChatBot');
+    conteinerIconeChat.classList.add('conteinerIconeChat');
     textoNovoContainerResposta.textContent = resposta;
-
-    containerPerguntasERespostas.appendChild(novoContainerResposta);
+    containerPerguntasERespostas.appendChild(divp);
+    divp.appendChild(conteinerIconeChat);
+    conteinerIconeChat.appendChild(icone);
+    divp.appendChild(novoContainerResposta);
     novoContainerResposta.appendChild(textoNovoContainerResposta);
 
 }
@@ -44,19 +46,26 @@ function mostrarPerguntaUsuario(pergunta){
 
 
    if(pergunta!=""){
+    let divp = document.createElement('div');
+    divp.className = 'divPaiPergunta';
+    let icone = document.createElement('img');
+    icone.src = 'default.gif';
+    icone.classList.add('iconeImg');
     let novoContainerPergunta = document.createElement('div');
-    let conteinerIconeUsuario=document.createElement('div')
+    let conteinerIconeUsuario=document.createElement('div');
   
     let containerPerguntasERespostas = document.getElementById('containerPerguntasERespostas');
     let textoNovoContainerPerguntas = document.createElement('span');
 
     novoContainerPergunta.classList.add('PerguntasDousuario');
-    conteinerIconeUsuario.classList.add('conteinerIconeUsuario')
+    conteinerIconeUsuario.classList.add('conteinerIconeUsuario');
     textoNovoContainerPerguntas.textContent = pergunta;
 
-    containerPerguntasERespostas.appendChild(novoContainerPergunta);
-    containerPerguntasERespostas.appendChild(conteinerIconeUsuario)
+    containerPerguntasERespostas.appendChild(divp);
+    divp.appendChild(novoContainerPergunta);
     novoContainerPergunta.appendChild(textoNovoContainerPerguntas);
+    divp.appendChild(conteinerIconeUsuario);
+    conteinerIconeUsuario.appendChild(icone);
 
 
    }
