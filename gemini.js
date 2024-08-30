@@ -13,12 +13,63 @@ async function mandar_mensagem(msg) {
     const result = await chat.sendMessage(msg);
     const response = await result.response;//response recebe a resposta do result
     const text = await response.text();//convert text
-    console.log(text);
+    
+    mostrarRespostaChatbot(text)
+}
+function mostrarIconeUSuario(){
+    let novoIcone
+}
+function mostrarIconeRoboInterrogação(){
+    let iconesDoRobo = document.getElementsByClassName('iconeRobo');
+    let imgRobo = iconesDoRobo.querySelector('img');
+    imgRobo.settAttribute('src', '')
+}
+
+function mostrarRespostaChatbot(resposta){
+    let novoContainerResposta = document.createElement('div');
+    let containerPerguntasERespostas = document.getElementById('containerPerguntasERespostas');
+
+    let textoNovoContainerResposta = document.createElement('span');
+
+    novoContainerResposta.classList.add('RespostaDoChatBot')
+    textoNovoContainerResposta.textContent = resposta;
+
+    containerPerguntasERespostas.appendChild(novoContainerResposta);
+    novoContainerResposta.appendChild(textoNovoContainerResposta);
+
+}
+
+
+function mostrarPerguntaUsuario(pergunta){
+
+
+   if(pergunta!=""){
+    let novoContainerPergunta = document.createElement('div');
+    let conteinerIconeUsuario=document.createElement('div')
+  
+    let containerPerguntasERespostas = document.getElementById('containerPerguntasERespostas');
+    let textoNovoContainerPerguntas = document.createElement('span');
+
+    novoContainerPergunta.classList.add('PerguntasDousuario');
+    conteinerIconeUsuario.classList.add('conteinerIconeUsuario')
+    textoNovoContainerPerguntas.textContent = pergunta;
+
+    containerPerguntasERespostas.appendChild(novoContainerPergunta);
+    containerPerguntasERespostas.appendChild(conteinerIconeUsuario)
+    novoContainerPergunta.appendChild(textoNovoContainerPerguntas);
+
+
+   }
+  else{
+    alert("Erro! Digite algo para enviar")
+  }
 }
 
 async function perguntarModelo() {
-    const text = document.getElementById("pergunta")
+    const text = document.getElementById("pergunta");
+    mostrarPerguntaUsuario(text.value)
     await mandar_mensagem(text.value)
+    
     text.value = ""
 }
 
@@ -38,11 +89,10 @@ document.addEventListener('DOMContentLoaded', async function comecar_cod(){
     allPrompts.push('Mato Grosso do Sul possui três biomas o Cerrado, a Mata Atlântica e o Pantanal.'); 
 
     console.log('Começo')
-    let mandar_prompt = await chat.sendMessage(allPrompts);
-    await mandar_prompt.response;
-    await mandar_mensagem('Você pode se apresentar pra mim e dizer qual sua missão?')
-    console.log('Fim')
+    await chat.sendMessage(allPrompts);
+    await mandar_mensagem('Você pode se apresentar pra mim e dizer qual sua missão? Após isso, pergunte meu nome');
+    console.log('Fim');
 
-    const botao = document.getElementById("botao")
+    const botao = document.getElementById("botao");
     botao.addEventListener("click", perguntarModelo);
 })
