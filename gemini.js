@@ -1,5 +1,6 @@
 let quantidadeLetrasDivResp = 0;
 let quantidadeLetrasDivPerg = 0;
+let espera_msg_momento = false;
 import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
 
 const ajuda_API_KEY = Math.floor(Math.random() * 2);
@@ -129,6 +130,7 @@ function mostrarRespostaChatbot(resposta, sourceIcone){
     novoContainerResposta.classList.add('RespostaDoChatBot');
     conteinerIconeChat.classList.add('conteinerIconeChat');
     textoNovoContainerResposta.textContent = resposta;
+    espera_msg_momento = false;
 
 }
 
@@ -166,12 +168,17 @@ function mostrarPerguntaUsuario(pergunta, sourceIcone){
 }
 
 async function perguntarModelo() {
-    const text = document.getElementById("pergunta");
-    quantidadeLetrasDivPerg = text.value.length;
-    mostrarPerguntaUsuario(text.value, iconeAtual)
-    await mandar_mensagem(text.value)
-    
-    text.value = ""
+    console.log(`esperar msg ${espera_msg_momento}`)
+    if (espera_msg_momento==false)
+        {
+            espera_msg_momento = true;
+            const text = document.getElementById("pergunta");
+            quantidadeLetrasDivPerg = text.value.length;
+            mostrarPerguntaUsuario(text.value, iconeAtual)
+            await mandar_mensagem(text.value)
+            
+            text.value = ""
+        }
 }
 
 document.addEventListener('DOMContentLoaded', async function comecar_cod(){
@@ -224,6 +231,5 @@ document.addEventListener('DOMContentLoaded', async function comecar_cod(){
 })
 function funcaoTeste(){
     carregarMensagemChatbot('isso é uma mensagem de teste', 'default.gif')
-    mostrarPerguntaUsuario('isso é uma mensagem de teste', iconeAtual)
-    
+    mostrarPerguntaUsuario('isso é uma mensagem de teste', iconeAtual)  
 }
