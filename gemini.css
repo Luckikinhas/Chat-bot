@@ -21,8 +21,8 @@
 .cabecalhoChatbot{
     margin-top: none;
     background-color: #ffffff;
- 
-    
+    display: block;
+    /*Mexi nessa bosta nao reclama*/
     
 }
 
@@ -59,19 +59,20 @@
 
 
 .divPaiRespostaDoChatBot{
-    width: 415px;
+    width: 100%;
     display: flex;
     align-items: flex-start;
 }
 .divPaiPergunta{
     display: flex;
-    width: 400px;
-    align-items: flex-end;
+    width: 100%;
+    align-items: flex-start;
     margin-right: 2px;
     overflow-wrap: break-word; 
 }
 .RespostaDoChatBot{
-    width: 180px;
+    width: 50%;
+
     margin-bottom: 6px;
     padding-top: 7px;
     padding-bottom: 7px;
@@ -82,17 +83,18 @@
     margin-inline-start: 5px;
     color: #ffffff;
     padding-inline-start: 7px;
+    padding: 7px;
     background-color: #3eac3c;
     margin-right: auto;
     
 }
 .PerguntasDousuario{
-   
-    padding-inline-start: 7px;
-    margin-left: auto;
-    margin-bottom: 9px;
-    width: 150px;
     
+    padding-inline-start: 7px;
+    margin-right: 5px;
+    margin-left: auto;
+    width: 150px;
+    min-height: 33px;
     padding-top: 7px;
     padding-bottom: 7px;
     border-top-left-radius: 8px;
@@ -116,11 +118,12 @@
 
 .backgroundDoChatBot {
     position: relative;
-    display: flex;
+    display: none;
     flex-direction: column;
     overflow-y: auto;
     width: 400px;
     height: 550px;
+    resize: auto;
     background-color: #f3f3f3;
     border: 0.2px solid black;
     border-radius: 18px;
@@ -140,7 +143,7 @@
 }
 #containerPerguntasERespostas {
     flex: 1;
- 
+    
 
     overflow-y: auto;
     overflow-x: hidden;
@@ -157,7 +160,7 @@
 .escolhaIcone{
     font-family: 'Kanit';
     display: block;
-    
+    align-self: center;
     color: #b8b7b7;
     text-align: center;
     background-color: #ffffff;
@@ -209,4 +212,32 @@
 .animacao3Pontos{
     height: 30px;
     width: 30px;
+}
+
+#sair{
+    color: red;
+    background: none;
+    border: none;
+    right: 0;
+    top: 0;
+    padding: 6px;
+    position: absolute;
+}
+
+#botaoCorpoChatBot
+{
+    border-radius: 100px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+
+#img_botao_bot
+{
+    width: 90%;
+    height: 90%;
 }
