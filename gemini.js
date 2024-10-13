@@ -28,11 +28,12 @@ let iconeAtual;
 let contadorMensagens = 0;
 let botaoIcones=document.querySelectorAll('.botaoIcones')
 let escolhaIcone=document.getElementById('escolhaIcone')
+let botaoSelecionado = null;
 botaoIcones.forEach(function(botao){
  botao.addEventListener('click',function(event){
-    let botaoSelecionado=event.currentTarget
+    botaoSelecionado=event.currentTarget;
     
-    let valor = botaoSelecionado.value 
+    let valor = botaoSelecionado.value;
     mostrarIconeUsuario(valor)
 escolhaIcone.style.display="none"
    
@@ -64,13 +65,13 @@ function ajusteTamanhoDiv (quantidade)
     }
     else 
     {
-        return '180px';
+        return '45%';
     }
 }
 
 function mostrarIconeUsuario(value){
     iconeAtual = value
-    alert(iconeAtual)
+
 }
 function carregarMensagemChatbot(resposta, sourceIcone){
     let divp = document.createElement('div');
@@ -148,7 +149,6 @@ function mostrarPerguntaUsuario(pergunta, sourceIcone){
     let conteinerIconeUsuario = document.createElement('div');
     let containerPerguntasERespostas = document.getElementById('containerPerguntasERespostas');
     let textoNovoContainerPerguntas = document.createElement('span');
-
     novoContainerPergunta.classList.add('PerguntasDousuario');
     conteinerIconeUsuario.classList.add('conteinerIconeUsuario');
     textoNovoContainerPerguntas.textContent = pergunta;
@@ -169,15 +169,15 @@ function mostrarPerguntaUsuario(pergunta, sourceIcone){
 
 async function perguntarModelo() {
     console.log(`esperar msg ${espera_msg_momento}`)
-    if (espera_msg_momento==false)
+    if (espera_msg_momento==false && botaoSelecionado!=null)
         {
             espera_msg_momento = true;
             const text = document.getElementById("pergunta");
             quantidadeLetrasDivPerg = text.value.length;
-            mostrarPerguntaUsuario(text.value, iconeAtual)
+            mostrarPerguntaUsuario(text.value, iconeAtual);
             await mandar_mensagem(text.value)
-            
             text.value = ""
+            
         }
 }
 
@@ -221,7 +221,7 @@ document.addEventListener('DOMContentLoaded', async function comecar_cod(){
     allPrompts.push('Tente resumir as suas respostas');
     
     console.log('Começo');
-    await mandar_mensagem('Você pode se apresentar pra mim e dizer qual sua missão? Após isso, pergunte meu nome');
+    await mandar_mensagem('Você pode se apresentar pra mim e dizer qual sua missão, lembrando que seu nome é Ifinho? Após isso, pergunte meu nome');
     await chat.sendMessage(allPrompts);
 
     console.log('Fim');
@@ -233,3 +233,23 @@ function funcaoTeste(){
     carregarMensagemChatbot('isso é uma mensagem de teste', 'default.gif')
     mostrarPerguntaUsuario('isso é uma mensagem de teste', iconeAtual)  
 }
+
+let sair = document.getElementById('sair');
+sair.addEventListener('click', ()=>{
+    let corpoChatBot = document.getElementById('corpoChatBot');
+    corpoChatBot.style.display = 'none';
+
+    let botaoCorpoChatBot = document.getElementById('botaoCorpoChatBot');
+    botaoCorpoChatBot.style.display = 'flex';
+})
+
+let botaoCorpoChatBot = document.getElementById('botaoCorpoChatBot');    
+botaoCorpoChatBot.addEventListener('click', ()=>{
+    let botaoCorpoChatBot = document.getElementById('botaoCorpoChatBot');
+    botaoCorpoChatBot.style.display = 'none';
+
+    let corpoChatBot = document.getElementById('corpoChatBot');
+    corpoChatBot.style.display = 'flex';
+    corpoChatBot.style.width = '400px';
+    corpoChatBot.style.height = '550px';
+})
