@@ -62,6 +62,7 @@
     width: 100%;
     display: flex;
     align-items: flex-start;
+    padding-bottom: 6px;
 }
 .divPaiPergunta{
     display: flex;
@@ -69,12 +70,10 @@
     align-items: flex-start;
     margin-right: 2px;
     overflow-wrap: break-word; 
+    padding-bottom: 6px;
 }
 .RespostaDoChatBot{
     width: 50%;
-
-    margin-bottom: 6px;
-    padding-top: 7px;
     padding-bottom: 7px;
     border-top-left-radius: 0px;
     border-top-right-radius: 8px;
@@ -108,9 +107,8 @@
 
 }
 .conteinerIconeChat, .conteinerIconeUsuario, .iconeImg{
-    margin-bottom: 9px;
     width: 50px;
-    height: 50px;
+    height: 49px;
     border-radius: 50px;
     background-color: #ecebeb;
 }
@@ -144,7 +142,8 @@
 #containerPerguntasERespostas {
     flex: 1;
     
-
+    padding-right: 7px;
+    padding-left: 7px;
     overflow-y: auto;
     overflow-x: hidden;
    
