@@ -116,7 +116,7 @@
 
 .backgroundDoChatBot {
     position: relative;
-    display: none;
+    display: flex;
     flex-direction: column;
     overflow-y: auto;
     width: 360px;
