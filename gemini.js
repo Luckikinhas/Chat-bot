@@ -234,23 +234,3 @@ function funcaoTeste(){
     mostrarPerguntaUsuario('isso é uma mensagem de teste', iconeAtual)  
 }
 
-
-let sair = document.getElementById('sair');
-sair.addEventListener('click', ()=>{
-    let corpoChatBot = document.getElementById('corpoChatBot');
-    corpoChatBot.style.display = 'none';
-
-    let botaoCorpoChatBot = document.getElementById('botaoCorpoChatBot');
-    botaoCorpoChatBot.style.display = 'flex';
-})
-
-let botaoCorpoChatBot = document.getElementById('botaoCorpoChatBot');    
-botaoCorpoChatBot.addEventListener('click', ()=>{
-    let botaoCorpoChatBot = document.getElementById('botaoCorpoChatBot');
-    botaoCorpoChatBot.style.display = 'none';
-
-    let corpoChatBot = document.getElementById('corpoChatBot');
-    corpoChatBot.style.display = 'flex';
-    corpoChatBot.style.width = '400px';
-    corpoChatBot.style.height = '550px';
-})
