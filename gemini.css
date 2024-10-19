@@ -119,8 +119,8 @@
     display: none;
     flex-direction: column;
     overflow-y: auto;
-    width: 400px;
-    height: 550px;
+    width: 360px;
+    height: 500px;
     resize: auto;
     background-color: #f3f3f3;
     border: 0.2px solid black;
