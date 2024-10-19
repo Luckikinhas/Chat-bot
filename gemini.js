@@ -74,6 +74,7 @@ function mostrarIconeUsuario(value){
 
 }
 function carregarMensagemChatbot(resposta, sourceIcone){
+    
     let divp = document.createElement('div');
     let containerTexto = document.createElement('div');
     let containerMensagens = document.getElementById('containerPerguntasERespostas');
@@ -117,7 +118,8 @@ function mostrarRespostaChatbot(resposta, sourceIcone){
     novoContainerResposta.style.width = tamanhoDivResp;
     let containerPerguntasERespostas = document.getElementById('containerPerguntasERespostas');
     let textoNovoContainerResposta = document.createElement('span')
-
+    
+    let respostaSemAsterisco = resposta.replace(/\*/g, '');
     
     containerPerguntasERespostas.appendChild(divp);
     divp.appendChild(conteinerIconeChat);
@@ -130,7 +132,7 @@ function mostrarRespostaChatbot(resposta, sourceIcone){
     icone.classList.add('iconeImg');
     novoContainerResposta.classList.add('RespostaDoChatBot');
     conteinerIconeChat.classList.add('conteinerIconeChat');
-    textoNovoContainerResposta.textContent = resposta;
+    textoNovoContainerResposta.textContent = respostaSemAsterisco;
     espera_msg_momento = false;
 
 }
@@ -210,7 +212,6 @@ document.addEventListener('DOMContentLoaded', async function comecar_cod(){
     allPrompts.push('O estado do Rio Grande do Norte possui 2 biomas: Caatinga e Mata Atlântica.');//RGN 24
     allPrompts.push('O estado de Sergipe possui 2 biomas: Caatinga e Mata Atlântica.')//Sergipe 25
     allPrompts.push('O estado do Rio Grande do Sul possui dois biomas: Pampa e Mata Atlântica')//RGS 26
-
     allPrompts.push('Agora que acabamos com os biomas brasileiros, vamos falar sobre alguns comportamentos, características dicas e informações necessárias que você deve seguir:')
     allPrompts.push('seu nome vai ser Ifinho.')//pode mudar o nome se quiser era só um teste
     allPrompts.push('sempre que alguem perguntar qual sua missão aqui sua resposta vai ser: é fornecer informações sobre os biomas brasileiros para alunos.');
@@ -219,7 +220,6 @@ document.addEventListener('DOMContentLoaded', async function comecar_cod(){
     allPrompts.push('fique atento com os estados e cidades que possuem cada bioma e qual sua extensão.');
     allPrompts.push('sempre que for perguntado quais estados possuem mais biomas a resposta é: os estados que possuem mais biomas são Mato Grosso, Mato Grosso do Sul, Bahia e Minas Gerais, cada um com três biomas.');
     allPrompts.push('Tente resumir as suas respostas');
-    
     console.log('Começo');
     await mandar_mensagem('Você pode se apresentar pra mim e dizer qual sua missão, lembrando que seu nome é Ifinho? Após isso, pergunte meu nome');
     await chat.sendMessage(allPrompts);
