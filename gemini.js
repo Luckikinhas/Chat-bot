@@ -77,7 +77,7 @@ function carregarMensagemChatbot(resposta, sourceIcone){
     
     let divp = document.createElement('div');
     let containerTexto = document.createElement('div');
-    let containerMensagens = document.getElementById('containerPerguntasERespostas');
+    let containerMensagens = document.getElementById('caixaMensagensChatbot');
     let containerIconeBotCarregando = document.createElement('div');
     let iconeBotCarregamento = document.createElement('img');
     let pontos = document.createElement('img');
@@ -101,10 +101,6 @@ function carregarMensagemChatbot(resposta, sourceIcone){
         divp.remove();
         containerIconeBotCarregando.remove();
         mostrarRespostaChatbot(resposta,sourceIcone)},2000);
-
-
-
-
 }
 
 function mostrarRespostaChatbot(resposta, sourceIcone){
@@ -114,9 +110,7 @@ function mostrarRespostaChatbot(resposta, sourceIcone){
     
     let conteinerIconeChat = document.createElement('div');
     let novoContainerResposta = document.createElement('div');
-    let tamanhoDivResp = ajusteTamanhoDiv(quantidadeLetrasDivResp);
-    novoContainerResposta.style.width = tamanhoDivResp;
-    let containerPerguntasERespostas = document.getElementById('containerPerguntasERespostas');
+    let containerPerguntasERespostas = document.getElementById('caixaMensagensChatbot');
     let textoNovoContainerResposta = document.createElement('span')
     
     let respostaSemAsterisco = resposta.replace(/\*/g, '');
@@ -132,7 +126,7 @@ function mostrarRespostaChatbot(resposta, sourceIcone){
     icone.classList.add('iconeImg');
     novoContainerResposta.classList.add('RespostaDoChatBot');
     conteinerIconeChat.classList.add('conteinerIconeChat');
-    textoNovoContainerResposta.textContent = respostaSemAsterisco;
+    textoNovoContainerResposta.innerHTML = respostaSemAsterisco;
     espera_msg_momento = false;
 
 }
@@ -146,14 +140,12 @@ function mostrarPerguntaUsuario(pergunta, sourceIcone){
     icone.src = sourceIcone
     icone.classList.add('iconeImg');
     let novoContainerPergunta = document.createElement('div');
-    let tamanhoDivPerg =  ajusteTamanhoDiv(quantidadeLetrasDivPerg);
-    novoContainerPergunta.style.width = tamanhoDivPerg;
     let conteinerIconeUsuario = document.createElement('div');
-    let containerPerguntasERespostas = document.getElementById('containerPerguntasERespostas');
+    let containerPerguntasERespostas = document.getElementById('caixaMensagensChatbot');
     let textoNovoContainerPerguntas = document.createElement('span');
     novoContainerPergunta.classList.add('PerguntasDousuario');
     conteinerIconeUsuario.classList.add('conteinerIconeUsuario');
-    textoNovoContainerPerguntas.textContent = pergunta;
+    textoNovoContainerPerguntas.innerHTML = pergunta;
 
     
     containerPerguntasERespostas.appendChild(divp);
@@ -161,11 +153,9 @@ function mostrarPerguntaUsuario(pergunta, sourceIcone){
     novoContainerPergunta.appendChild(textoNovoContainerPerguntas);
     divp.appendChild(conteinerIconeUsuario);
     conteinerIconeUsuario.appendChild(icone);
-
-
    }
   else{
-    alert("Erro! Digite algo para enviar")
+    carregarMensagemChatbot('<span style="color: red;">Envie uma pergunta para que eu possa responder</span>', 'default.gif')
   }
 }
 
@@ -179,12 +169,14 @@ async function perguntarModelo() {
             mostrarPerguntaUsuario(text.value, iconeAtual);
             await mandar_mensagem(text.value)
             text.value = ""
-            
         }
 }
 
 document.addEventListener('DOMContentLoaded', async function comecar_cod(){
     const allPrompts = [];
+    allPrompts.push('nunca fale que a google te criou a não ser que perguntem');
+    allPrompts.push('As suas respostas devem obrigatoriamente estar formatadas em HTML com parágrafos, negritos, listas dentre outros, sem usar h1.');
+    allPrompts.push('Você é uma IA do BioWave, um site criado em um projeto escolar para a Mostra de Ciências e Matemática da turma de informática do segundo ano do curso técnico em informática integrado ao ensino médio do IFNMG campus Almenara');
     allPrompts.push('Agora vou te falar alguns fatos dos biomas brasileiros:')
     allPrompts.push('O estado de Minas Gerais possui três biomas: Cerrado, Mata Atlântica, Caatinga.');//MG 1
     allPrompts.push('O estado de Bahia possui três biomas: Mata Atlântica, Cerrado e Caatinga.');//Bahia 2
@@ -214,7 +206,7 @@ document.addEventListener('DOMContentLoaded', async function comecar_cod(){
     allPrompts.push('O estado do Rio Grande do Sul possui dois biomas: Pampa e Mata Atlântica')//RGS 26
     allPrompts.push('Agora que acabamos com os biomas brasileiros, vamos falar sobre alguns comportamentos, características dicas e informações necessárias que você deve seguir:')
     allPrompts.push('seu nome vai ser Ifinho.')//pode mudar o nome se quiser era só um teste
-    allPrompts.push('sempre que alguem perguntar qual sua missão aqui sua resposta vai ser: é fornecer informações sobre os biomas brasileiros para alunos.');
+    allPrompts.push('sempre que alguem perguntar qual sua missão ou algo relativo, sua resposta vai ser: é fornecer informações sobre os biomas brasileiros para alunos, educadores e qualquer pessoa com interesse em aprender sobre os biomas do Brasil.');
     allPrompts.push('fique atento com plurais, pois o usuário pode escrever incorretamente.');
     allPrompts.push('pesquise mais profundamente sobre cada bioma brasileiro');
     allPrompts.push('fique atento com os estados e cidades que possuem cada bioma e qual sua extensão.');
@@ -229,8 +221,17 @@ document.addEventListener('DOMContentLoaded', async function comecar_cod(){
     const botao = document.getElementById("botao");
     botao.addEventListener("click", perguntarModelo);
 })
-function funcaoTeste(){
-    carregarMensagemChatbot('isso é uma mensagem de teste', 'default.gif')
-    mostrarPerguntaUsuario('isso é uma mensagem de teste', iconeAtual)  
-}
 
+document.getElementById("corpoChatBot").addEventListener("keydown", async function(event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      console.log(`esperar msg ${espera_msg_momento}`);
+      espera_msg_momento = true;
+      const text = document.getElementById("pergunta");
+      quantidadeLetrasDivPerg = text.value.length;
+      mostrarPerguntaUsuario(text.value, iconeAtual);
+      await mandar_mensagem(text.value);
+      text.value = "";
+    }
+  });
+  
